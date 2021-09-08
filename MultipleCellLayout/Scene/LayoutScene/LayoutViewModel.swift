@@ -11,38 +11,39 @@ protocol ExpandableSectionDelegate: class {
     func expand(section: Int)
 }
 
-enum BankingSection {
-    case account(AccountSection)
+enum BankingSectionType {
+    case account(AccountSectionModel)
 //    case myMenu(MymenuSection)
 }
 
 class LayoutViewModel {
     weak var delegate: ReloadTableDelegate?
-    var sections: [BankingSection] = []
+    var sectionTypes: [BankingSectionType] = []
     
     init() {
         setTempData()
     }
     
     private func setTempData() {
-        let accountSection = AccountSection(
-            models: [
+        let accountSectionModel = AccountSectionModel(
+            cellModels: [
                 AccountModel(account: "110-100", money: "2,000"),
                 AccountModel(account: "210-100", money: "5,000"),
                 AccountModel(account: "310-100", money: "12,000")
-            ]
+            ],
+            headerModel: "Section Header"
         )
-        sections.append(.account(accountSection))
+        sectionTypes.append(.account(accountSectionModel))
     }
 }
 
 extension LayoutViewModel: ExpandableSectionDelegate {
     func expand(section index: Int) {
-        let section = sections[index]
+        let type = sectionTypes[index]
         
-        if case let .account(item) = section {
-            item.isExpandable.toggle()
-            delegate?.reloadTable(sections: [index])
-        }
+//        if case let .account(item) = type {
+//            item.isExpandable.toggle()
+//            delegate?.reloadTable(sections: [index])
+//        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SectionType.swift
+//  SectionModel.swift
 //  MultipleCellLayout
 //
 //  Created by SeokSoo on 2021/09/04.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SectionType {
+protocol SectionModel {
     associatedtype CellModel
     /// Section 안의 Cell 수
     var rowCount: Int { get }
@@ -15,7 +15,7 @@ protocol SectionType {
     var displayCellModels: [CellModel] { get }
 }
 
-extension SectionType {
+extension SectionModel {
     var rowCount: Int {
         return displayCellModels.count
     }
@@ -25,14 +25,14 @@ protocol Expandable {
     var isExpandable: Bool { get set }
 }
 
-protocol ExpandableSectionType: SectionType, Expandable {
+protocol ExpandableSectionModel: SectionModel, Expandable {
     /// 확장하기 전의 Cell 수를 지정
     var initialCount: Int { get }
     /// Section의 모든 Cell 데이터를 담고 있는 변수
     var totalModels: [CellModel] { get }
 }
 
-extension ExpandableSectionType {
+extension ExpandableSectionModel {
     var displayCellModels: [CellModel] {
         if isExpandable {
             return totalModels
@@ -44,4 +44,9 @@ extension ExpandableSectionType {
             }
         }
     }
+}
+
+protocol HeaderViewModel {
+    associatedtype HeaderViewModel
+    var headerModel: HeaderViewModel { get }
 }

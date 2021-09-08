@@ -15,15 +15,15 @@ class LayoutCellFactory {
     }
     
     var sectionCount: Int {
-        return viewModel.sections.count
+        return viewModel.sectionTypes.count
     }
     
     func rowCount(at index: Int) -> Int {
-        let section = viewModel.sections[index]
+        let type = viewModel.sectionTypes[index]
         
-        switch section {
-        case .account(let list):
-            return list.rowCount
+        switch type {
+        case .account(let section):
+            return section.rowCount
         }
     }
     
@@ -35,7 +35,7 @@ class LayoutCellFactory {
         tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let type = viewModel.sections[indexPath.section]
+        let type = viewModel.sectionTypes[indexPath.section]
         switch type {
         case .account(let section):
             let cell = tableView.dequeueReusableCell(type: AccountTableViewCell.self, for: indexPath)
@@ -45,7 +45,7 @@ class LayoutCellFactory {
     }
     
     func footerView(section index: Int) -> UIView? {
-        let type = viewModel.sections[index]
+        let type = viewModel.sectionTypes[index]
         switch type {
         case .account(_):
             let view = ExpandableFooterView(section: index)
@@ -55,7 +55,7 @@ class LayoutCellFactory {
     }
     
     func footerHeight(section index: Int) -> CGFloat {
-        let type = viewModel.sections[index]
+        let type = viewModel.sectionTypes[index]
         switch type {
         case .account(_):
             return 30
@@ -63,7 +63,7 @@ class LayoutCellFactory {
     }
     
     func headerView(section index: Int) -> UIView? {
-        let type = viewModel.sections[index]
+        let type = viewModel.sectionTypes[index]
         switch type {
         case .account(_):
             let view = HeaderView(section: index, title: "Expandable Section HeaderView")
@@ -72,7 +72,7 @@ class LayoutCellFactory {
     }
     
     func headerHeight(section index: Int) -> CGFloat {
-        let type = viewModel.sections[index]
+        let type = viewModel.sectionTypes[index]
         switch type {
         case .account(_):
             return 50
