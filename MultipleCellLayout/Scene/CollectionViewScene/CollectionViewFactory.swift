@@ -15,48 +15,46 @@ class CollectionViewFactory {
     }
     
     var sectionCount: Int {
-        return viewModel.sectionTypes.count
+        return viewModel.configurators.count
     }
     
     func rowCount(at index: Int) -> Int {
-        let type = viewModel.sectionTypes[index]
-
-        switch type {
-        case .account(let section):
-            return section.rowCount
-        }
+        return viewModel.configurators[index].cellConfigurator.count
     }
     
     func registerCells(on collectionView: UICollectionView) {
-        collectionView.register(type: AccountCollectionViewCell.self)
-        collectionView.registerHeaderView(type: AccountHeaderCollectionReusableView.self)
-        collectionView.registerFooterView(type: AccountHeaderCollectionReusableView.self)
+        collectionView.register(identifier: AccountCellConfig.identifier)
+        collectionView.register(identifier: TileCellConfig.identifier)
+        collectionView.register(identifier: GridCellConfig.identifier)
+        
+        collectionView.registerHeaderView(identifier: AccountHeaderConfig.identifier)
+        collectionView.registerFooterView(identifier: AccountHeaderConfig.identifier)
     }
     
     func dequeueReuseCell(
         collectionView: UICollectionView,
         cellForRowAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let type = viewModel.sectionTypes[indexPath.section]
-        switch type {
-        case .account(let section):
-            let cell = collectionView.dequeueReusableCell(type: AccountCollectionViewCell.self, for: indexPath)
-            cell.setModel(models: section.displayCellModels)
-            return cell
-        }
+        let item = viewModel.configurators[indexPath.section]
+        let cellConfigurator = item.cellConfigurator[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: type(of:cellConfigurator).identifier, for: indexPath)
+        item.cellConfigurator[indexPath.row].configure(cell: cell)
+        return cell
     }
     
     func reusableView(collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView {
-        let type = viewModel.sectionTypes[indexPath.section]
-        switch type {
-        case .account(let section):
-            if kind == UICollectionView.elementKindSectionHeader {
-                let view = collectionView.dequeReusableHeaderView(type: AccountHeaderCollectionReusableView.self, for: indexPath)
-                view.titleLabel.text = section.headerModel
+        if kind == UICollectionView.elementKindSectionHeader {
+            if let headerConfigurator = viewModel.configurators[indexPath.section].headerConfigurator {
+                let identifier = type(of: headerConfigurator).identifier
+                let view = collectionView.dequeReusableHeaderView(identifer: identifier, for: indexPath)
+                headerConfigurator.configure(cell: view)
                 return view
-            } else if kind == UICollectionView.elementKindSectionFooter {
-                let view = collectionView.dequeReusableFooterView(type: AccountHeaderCollectionReusableView.self, for: indexPath)
-                view.titleLabel.text = "Account Section Footer"
+            }
+        } else if kind == UICollectionView.elementKindSectionFooter {
+            if let footerConfigurator = viewModel.configurators[indexPath.section].footerConfigurator {
+                let identifier = type(of: footerConfigurator).identifier
+                let view = collectionView.dequeReusableFooterView(identifer: identifier, for: indexPath)
+                footerConfigurator.configure(cell: view)
                 return view
             }
         }
@@ -64,14 +62,14 @@ class CollectionViewFactory {
     }
     
     func cellSize(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 300)
+        return viewModel.configurators[indexPath.section].cellSize(collectionView: collectionView, at: indexPath.row)
     }
     
     func headerViewSize(collectionView: UICollectionView, section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        return viewModel.configurators[section].headerSize(collectionView: collectionView)
     }
     
     func footerViewSize(collectionView: UICollectionView, section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        return viewModel.configurators[section].footerSize(collectionView: collectionView)
     }
 }

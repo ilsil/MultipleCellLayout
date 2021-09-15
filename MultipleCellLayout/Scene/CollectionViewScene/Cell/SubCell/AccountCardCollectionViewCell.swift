@@ -7,8 +7,7 @@
 
 import UIKit
 
-class AccountCardCollectionViewCell: UICollectionViewCell {
-
+class AccountCardCollectionViewCell: UICollectionViewCell, ConfigurableCell {
     @IBOutlet weak var bankLogoView: UIView!
     @IBOutlet weak var accountLabel: UILabel!
     
@@ -23,7 +22,7 @@ class AccountCardCollectionViewCell: UICollectionViewCell {
         bankLogoView.backgroundColor = .cyan
     }
     
-    func setModel(model: AccountModel) {
-        accountLabel.text = "\(model.account): $\(model.money)"
+    func configure(data: AccountModel) {
+        accountLabel.text = "\(data.account): $\(data.money)"
     }
 }

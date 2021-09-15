@@ -7,8 +7,7 @@
 
 import UIKit
 
-class AccountHeaderCollectionReusableView: UICollectionReusableView {
-
+class AccountHeaderCollectionReusableView: UICollectionReusableView, ConfigurableReusableView {
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
@@ -16,8 +15,7 @@ class AccountHeaderCollectionReusableView: UICollectionReusableView {
         // Initialization code
     }
     
-    func setModel(model: String) {
-        titleLabel.text = model
+    func configure(data: String) {
+        titleLabel.text = data
     }
-    
 }

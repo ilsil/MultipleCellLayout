@@ -24,10 +24,21 @@ class CollectionViewController: UIViewController {
 }
 
 extension CollectionViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(translationX: 0, y: 50)
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0.1*Double(indexPath.row), options: [.curveEaseInOut], animations: {
+            cell.transform = CGAffineTransform(translationX: 0, y: 0)
+            cell.alpha = 1
+        })
+    }
 }
 
 extension CollectionViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return factory.sectionCount
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return factory.rowCount(at: section)
     }

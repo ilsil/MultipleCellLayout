@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AccountCollectionViewCell: UICollectionViewCell {
+class AccountCollectionViewCell: UICollectionViewCell, ConfigurableCell {
     @IBOutlet weak var collectionView: UICollectionView!
     private var accountList: [AccountModel]? {
         didSet {
@@ -26,10 +26,9 @@ class AccountCollectionViewCell: UICollectionViewCell {
         collectionView.register(type: AccountCardCollectionViewCell.self)
     }
     
-    func setModel(models: [AccountModel]) {
-        accountList = models
+    func configure(data: [AccountModel]) {
+        accountList = data
     }
-
 }
 
 extension AccountCollectionViewCell: UICollectionViewDelegate {
@@ -44,7 +43,7 @@ extension AccountCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: AccountCardCollectionViewCell.self, for: indexPath)
         if let model = accountList?[indexPath.row] {
-            cell.setModel(model: model)
+            cell.configure(data: model)
         }
         return cell
     }
