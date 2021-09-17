@@ -7,12 +7,67 @@
 
 import UIKit
 
-protocol SectionConfigurator {
+protocol Expandable {
+    var isExpandable: Bool { get }
+}
+
+protocol ConfiguratorRegisterable {
+    static func register(collectionView: UICollectionView)
+}
+
+protocol SectionConfigurable {
     var cellConfigurator: [CellConfigurator] { get set }
     var headerConfigurator: ReusableViewConfigurator? { get }
     var footerConfigurator: ReusableViewConfigurator? { get }
     
-    func cellSize(collectionView: UICollectionView, at index: Int) -> CGSize
-    func headerSize(collectionView: UICollectionView) -> CGSize
-    func footerSize(collectionView: UICollectionView) -> CGSize
+    func rowCount() -> Int
+}
+
+class SectionConfigurator: SectionConfigurable {
+    var cellConfigurator: [CellConfigurator] = []
+    var headerConfigurator: ReusableViewConfigurator?
+    var footerConfigurator: ReusableViewConfigurator?
+    
+    init(
+        cellConfigurator: [CellConfigurator],
+        headerConfigurator: ReusableViewConfigurator? = nil,
+        footerConfigurator: ReusableViewConfigurator? = nil
+         ) {
+        self.cellConfigurator = cellConfigurator
+        self.headerConfigurator = headerConfigurator
+        self.footerConfigurator = footerConfigurator
+    }
+    
+    func rowCount() -> Int {
+        return cellConfigurator.count
+    }
+}
+
+class ExpandableSectionConfigurator: SectionConfigurator, Expandable {
+    private let initialRowCount: Int
+    var isExpandable: Bool = false
+    
+    init(
+        cellConfigurator: [CellConfigurator],
+        headerConfigurator: ReusableViewConfigurator? = nil,
+        footerConfigurator: ReusableViewConfigurator? = nil,
+        initialRowCount: Int
+    ) {
+        self.initialRowCount = initialRowCount
+        super.init(
+            cellConfigurator: cellConfigurator,
+            headerConfigurator: headerConfigurator,
+            footerConfigurator: footerConfigurator
+        )
+    }
+    
+    override func rowCount() -> Int {
+        let expandedRowCount = super.rowCount()
+        if isExpandable {
+            return expandedRowCount
+        } else {
+            let rowCount = expandedRowCount > initialRowCount ? initialRowCount : expandedRowCount
+            return rowCount
+        }
+    }
 }

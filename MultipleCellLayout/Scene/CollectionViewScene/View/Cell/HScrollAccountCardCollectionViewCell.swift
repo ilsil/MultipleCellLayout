@@ -1,5 +1,5 @@
 //
-//  AccountCollectionViewCell.swift
+//  HScrollAccountCardCollectionViewCell.swift
 //  MultipleCellLayout
 //
 //  Created by SeokSoo on 2021/09/08.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AccountCollectionViewCell: UICollectionViewCell, ConfigurableCell {
+class HScrollAccountCardCollectionViewCell: UICollectionViewCell, ConfigurableCell {
     @IBOutlet weak var collectionView: UICollectionView!
     private var accountList: [AccountModel]? {
         didSet {
@@ -31,11 +31,11 @@ class AccountCollectionViewCell: UICollectionViewCell, ConfigurableCell {
     }
 }
 
-extension AccountCollectionViewCell: UICollectionViewDelegate {
+extension HScrollAccountCardCollectionViewCell: UICollectionViewDelegate {
     
 }
 
-extension AccountCollectionViewCell: UICollectionViewDataSource {
+extension HScrollAccountCardCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return accountList?.count ?? 0
     }
@@ -49,7 +49,7 @@ extension AccountCollectionViewCell: UICollectionViewDataSource {
     }
 }
 
-extension AccountCollectionViewCell: UICollectionViewDelegateFlowLayout {
+extension HScrollAccountCardCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width-20, height: collectionView.frame.height)
     }

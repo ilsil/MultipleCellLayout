@@ -7,17 +7,21 @@
 
 import UIKit
 
+protocol Identifier {
+    static var identifier: String { get }
+}
+
 protocol ConfigurableCell {
     associatedtype DataType
     func configure(data: DataType)
 }
 
-protocol CellConfigurator {
-    static var identifier: String { get }
+protocol CellConfigurator: Identifier {
     func configure(cell: UICollectionViewCell)
+    func size(containerFrame: CGRect) -> CGSize
 }
 
-struct CollectionViewCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UICollectionViewCell {
+class CollectionViewCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UICollectionViewCell {
     
     static var identifier: String { return CellType.identifier }
     
@@ -29,5 +33,9 @@ struct CollectionViewCellConfigurator<CellType: ConfigurableCell, DataType>: Cel
     
     func configure(cell: UICollectionViewCell) {
         (cell as? CellType)?.configure(data: item)
+    }
+    
+    func size(containerFrame: CGRect) -> CGSize {
+        return .zero
     }
 }

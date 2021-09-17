@@ -52,7 +52,7 @@ extension UICollectionView {
         return view
     }
     
-    func dequeReusableHeaderView(identifer: String, for indexPath: IndexPath) -> UICollectionReusableView {
+    func dequeueReusableHeaderView(identifer: String, for indexPath: IndexPath) -> UICollectionReusableView {
         let view = self.dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: identifer,
@@ -60,7 +60,7 @@ extension UICollectionView {
         return view
     }
     
-    func dequeReusableFooterView(identifer: String, for indexPath: IndexPath) -> UICollectionReusableView {
+    func dequeueReusableFooterView(identifer: String, for indexPath: IndexPath) -> UICollectionReusableView {
         let view = self.dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionFooter,
             withReuseIdentifier: identifer,
@@ -68,12 +68,12 @@ extension UICollectionView {
         return view
     }
     
-    func dequeReusableHeaderView<View: UICollectionReusableView>(type: View.Type, for indexPath: IndexPath) -> View {
+    func dequeueReusableHeaderView<View: UICollectionReusableView>(type: View.Type, for indexPath: IndexPath) -> View {
         let view = self.dequeueReusableView(type: type, kind: UICollectionView.elementKindSectionHeader, for: indexPath)
         return view
     }
     
-    func dequeReusableFooterView<View: UICollectionReusableView>(type: View.Type, for indexPath: IndexPath) -> View {
+    func dequeueReusableFooterView<View: UICollectionReusableView>(type: View.Type, for indexPath: IndexPath) -> View {
         let view = self.dequeueReusableView(type: type, kind: UICollectionView.elementKindSectionFooter, for: indexPath)
         return view
     }

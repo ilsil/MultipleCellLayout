@@ -12,12 +12,12 @@ protocol ConfigurableReusableView {
     func configure(data: DataType)
 }
 
-protocol ReusableViewConfigurator {
-    static var identifier: String { get }
+protocol ReusableViewConfigurator: Identifier {
     func configure(cell: UICollectionReusableView)
+    func size(containerFrame: CGRect) -> CGSize
 }
 
-struct CollectionReusableViewConfigurator<ViewType: ConfigurableReusableView, DataType>: ReusableViewConfigurator where ViewType.DataType == DataType, ViewType: UICollectionReusableView {
+class CollectionReusableViewConfigurator<ViewType: ConfigurableReusableView, DataType>: ReusableViewConfigurator where ViewType.DataType == DataType, ViewType: UICollectionReusableView {
     static var identifier: String { return ViewType.identifier }
     let item: DataType
     
@@ -27,5 +27,9 @@ struct CollectionReusableViewConfigurator<ViewType: ConfigurableReusableView, Da
     
     func configure(cell: UICollectionReusableView) {
         (cell as? ViewType)?.configure(data: item)
+    }
+    
+    func size(containerFrame: CGRect) -> CGSize {
+        return .zero
     }
 }

@@ -18,10 +18,10 @@
 		11A176F426E3594B00DB2980 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A176F326E3594B00DB2980 /* AccountModel.swift */; };
 		11A1772726E8D41000DB2980 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1772526E8D41000DB2980 /* CollectionViewController.swift */; };
 		11A1772D26E8D47B00DB2980 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1772C26E8D47B00DB2980 /* CollectionViewModel.swift */; };
-		11A1773026E8D49200DB2980 /* CollectionViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1772F26E8D49200DB2980 /* CollectionViewFactory.swift */; };
+		11A1773026E8D49200DB2980 /* CollectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1772F26E8D49200DB2980 /* CollectionConfigurator.swift */; };
 		11A1773326E8D63100DB2980 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1773226E8D63100DB2980 /* UICollectionView+Extension.swift */; };
-		11A1773F26E8D89F00DB2980 /* AccountCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1773D26E8D89F00DB2980 /* AccountCollectionViewCell.swift */; };
-		11A1774026E8D89F00DB2980 /* AccountCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A1773E26E8D89F00DB2980 /* AccountCollectionViewCell.xib */; };
+		11A1773F26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1773D26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.swift */; };
+		11A1774026E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A1773E26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.xib */; };
 		11A1774526E8D9B800DB2980 /* AccountCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1774326E8D9B800DB2980 /* AccountCardCollectionViewCell.swift */; };
 		11A1774626E8D9B800DB2980 /* AccountCardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A1774426E8D9B800DB2980 /* AccountCardCollectionViewCell.xib */; };
 		11A1774F26E8E16400DB2980 /* AccountHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1774D26E8E16400DB2980 /* AccountHeaderCollectionReusableView.swift */; };
@@ -36,6 +36,14 @@
 		11A1777B26F23AD300DB2980 /* AccountSectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1777A26F23AD300DB2980 /* AccountSectionConfigurator.swift */; };
 		11A1777F26F23B8000DB2980 /* TileSectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1777E26F23B8000DB2980 /* TileSectionConfigurator.swift */; };
 		11A1778226F23BA600DB2980 /* GridSectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1778126F23BA600DB2980 /* GridSectionConfigurator.swift */; };
+		11B397E326F4B1500077E08A /* HScrollAccountCardCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B397E226F4B1500077E08A /* HScrollAccountCardCellConfigurator.swift */; };
+		11B397E726F4B1680077E08A /* TileCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B397E626F4B1680077E08A /* TileCellConfigurator.swift */; };
+		11B397EA26F4B1790077E08A /* TileImageCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B397E926F4B1790077E08A /* TileImageCellConfigurator.swift */; };
+		11B397ED26F4B18B0077E08A /* GridCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B397EC26F4B18B0077E08A /* GridCellConfigurator.swift */; };
+		11B397F126F4B1AC0077E08A /* TitleHeaderReusableViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B397F026F4B1AC0077E08A /* TitleHeaderReusableViewConfigurator.swift */; };
+		11B397F526F4B1EF0077E08A /* TileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B397F326F4B1EF0077E08A /* TileImageCollectionViewCell.swift */; };
+		11B397F626F4B1EF0077E08A /* TileImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B397F426F4B1EF0077E08A /* TileImageCollectionViewCell.xib */; };
+		11B397FE26F4B5540077E08A /* ConfiguratorViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B397FD26F4B5540077E08A /* ConfiguratorViewModelType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,10 +60,10 @@
 		11A176F326E3594B00DB2980 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		11A1772526E8D41000DB2980 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		11A1772C26E8D47B00DB2980 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
-		11A1772F26E8D49200DB2980 /* CollectionViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFactory.swift; sourceTree = "<group>"; };
+		11A1772F26E8D49200DB2980 /* CollectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionConfigurator.swift; sourceTree = "<group>"; };
 		11A1773226E8D63100DB2980 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
-		11A1773D26E8D89F00DB2980 /* AccountCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCollectionViewCell.swift; sourceTree = "<group>"; };
-		11A1773E26E8D89F00DB2980 /* AccountCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCollectionViewCell.xib; sourceTree = "<group>"; };
+		11A1773D26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HScrollAccountCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		11A1773E26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HScrollAccountCardCollectionViewCell.xib; sourceTree = "<group>"; };
 		11A1774326E8D9B800DB2980 /* AccountCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		11A1774426E8D9B800DB2980 /* AccountCardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCardCollectionViewCell.xib; sourceTree = "<group>"; };
 		11A1774D26E8E16400DB2980 /* AccountHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -70,6 +78,14 @@
 		11A1777A26F23AD300DB2980 /* AccountSectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionConfigurator.swift; sourceTree = "<group>"; };
 		11A1777E26F23B8000DB2980 /* TileSectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileSectionConfigurator.swift; sourceTree = "<group>"; };
 		11A1778126F23BA600DB2980 /* GridSectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSectionConfigurator.swift; sourceTree = "<group>"; };
+		11B397E226F4B1500077E08A /* HScrollAccountCardCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HScrollAccountCardCellConfigurator.swift; sourceTree = "<group>"; };
+		11B397E626F4B1680077E08A /* TileCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileCellConfigurator.swift; sourceTree = "<group>"; };
+		11B397E926F4B1790077E08A /* TileImageCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileImageCellConfigurator.swift; sourceTree = "<group>"; };
+		11B397EC26F4B18B0077E08A /* GridCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellConfigurator.swift; sourceTree = "<group>"; };
+		11B397F026F4B1AC0077E08A /* TitleHeaderReusableViewConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderReusableViewConfigurator.swift; sourceTree = "<group>"; };
+		11B397F326F4B1EF0077E08A /* TileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		11B397F426F4B1EF0077E08A /* TileImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TileImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		11B397FD26F4B5540077E08A /* ConfiguratorViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorViewModelType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				11A1772426E8D3C000DB2980 /* CollectionViewScene */,
-				11A1767E26E32C5C00DB2980 /* Main.storyboard */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -169,6 +184,7 @@
 		11A176E726E3582200DB2980 /* SectionConfigurator */ = {
 			isa = PBXGroup;
 			children = (
+				11B397FD26F4B5540077E08A /* ConfiguratorViewModelType.swift */,
 				11A1777026F23A0900DB2980 /* SectionConfigurator.swift */,
 				11A1777326F23A2700DB2980 /* CellConfigurator.swift */,
 				11A1777626F23A7E00DB2980 /* ReusableViewConfigurator.swift */,
@@ -179,13 +195,12 @@
 		11A1772426E8D3C000DB2980 /* CollectionViewScene */ = {
 			isa = PBXGroup;
 			children = (
-				11A1777926F23ABE00DB2980 /* SectionConfigurator */,
+				11A1777926F23ABE00DB2980 /* Configurator */,
 				11A1773A26E8D84A00DB2980 /* Model */,
-				11A1774C26E8E09F00DB2980 /* HeaderView */,
-				11A1773C26E8D88900DB2980 /* Cell */,
-				11A1772526E8D41000DB2980 /* CollectionViewController.swift */,
-				11A1772C26E8D47B00DB2980 /* CollectionViewModel.swift */,
-				11A1772F26E8D49200DB2980 /* CollectionViewFactory.swift */,
+				11B397FA26F4B4A00077E08A /* ViewModel */,
+				11B397F926F4B49B0077E08A /* View */,
+				11B397F826F4B4910077E08A /* ViewController */,
+				11A1772F26E8D49200DB2980 /* CollectionConfigurator.swift */,
 			);
 			path = CollectionViewScene;
 			sourceTree = "<group>";
@@ -201,24 +216,18 @@
 		11A1773C26E8D88900DB2980 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				11A1774226E8D99000DB2980 /* SubCell */,
-				11A1773D26E8D89F00DB2980 /* AccountCollectionViewCell.swift */,
-				11A1773E26E8D89F00DB2980 /* AccountCollectionViewCell.xib */,
+				11A1774326E8D9B800DB2980 /* AccountCardCollectionViewCell.swift */,
+				11A1774426E8D9B800DB2980 /* AccountCardCollectionViewCell.xib */,
+				11A1773D26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.swift */,
+				11A1773E26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.xib */,
 				11A1775A26EC7FF800DB2980 /* TileCollectionViewCell.swift */,
 				11A1775B26EC7FF800DB2980 /* TileCollectionViewCell.xib */,
 				11A1776026EC8F1800DB2980 /* GridCollectionViewCell.swift */,
 				11A1776126EC8F1800DB2980 /* GridCollectionViewCell.xib */,
+				11B397F326F4B1EF0077E08A /* TileImageCollectionViewCell.swift */,
+				11B397F426F4B1EF0077E08A /* TileImageCollectionViewCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		11A1774226E8D99000DB2980 /* SubCell */ = {
-			isa = PBXGroup;
-			children = (
-				11A1774326E8D9B800DB2980 /* AccountCardCollectionViewCell.swift */,
-				11A1774426E8D9B800DB2980 /* AccountCardCollectionViewCell.xib */,
-			);
-			path = SubCell;
 			sourceTree = "<group>";
 		};
 		11A1774C26E8E09F00DB2980 /* HeaderView */ = {
@@ -230,14 +239,69 @@
 			path = HeaderView;
 			sourceTree = "<group>";
 		};
-		11A1777926F23ABE00DB2980 /* SectionConfigurator */ = {
+		11A1777926F23ABE00DB2980 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				11B397DE26F4B0F00077E08A /* Section */,
+				11B397E126F4B1140077E08A /* ReusableView */,
+				11B397E026F4B1100077E08A /* Cell */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		11B397DE26F4B0F00077E08A /* Section */ = {
 			isa = PBXGroup;
 			children = (
 				11A1777A26F23AD300DB2980 /* AccountSectionConfigurator.swift */,
 				11A1777E26F23B8000DB2980 /* TileSectionConfigurator.swift */,
 				11A1778126F23BA600DB2980 /* GridSectionConfigurator.swift */,
 			);
-			path = SectionConfigurator;
+			path = Section;
+			sourceTree = "<group>";
+		};
+		11B397E026F4B1100077E08A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				11B397E226F4B1500077E08A /* HScrollAccountCardCellConfigurator.swift */,
+				11B397E626F4B1680077E08A /* TileCellConfigurator.swift */,
+				11B397E926F4B1790077E08A /* TileImageCellConfigurator.swift */,
+				11B397EC26F4B18B0077E08A /* GridCellConfigurator.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		11B397E126F4B1140077E08A /* ReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				11B397F026F4B1AC0077E08A /* TitleHeaderReusableViewConfigurator.swift */,
+			);
+			path = ReusableView;
+			sourceTree = "<group>";
+		};
+		11B397F826F4B4910077E08A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				11A1772526E8D41000DB2980 /* CollectionViewController.swift */,
+				11A1767E26E32C5C00DB2980 /* Main.storyboard */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		11B397F926F4B49B0077E08A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11A1774C26E8E09F00DB2980 /* HeaderView */,
+				11A1773C26E8D88900DB2980 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11B397FA26F4B4A00077E08A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				11A1772C26E8D47B00DB2980 /* CollectionViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,8 +365,9 @@
 				11A1775026E8E16400DB2980 /* AccountHeaderCollectionReusableView.xib in Resources */,
 				11A1774626E8D9B800DB2980 /* AccountCardCollectionViewCell.xib in Resources */,
 				11A1776326EC8F1800DB2980 /* GridCollectionViewCell.xib in Resources */,
+				11B397F626F4B1EF0077E08A /* TileImageCollectionViewCell.xib in Resources */,
 				11A1768526E32C5E00DB2980 /* LaunchScreen.storyboard in Resources */,
-				11A1774026E8D89F00DB2980 /* AccountCollectionViewCell.xib in Resources */,
+				11A1774026E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.xib in Resources */,
 				11A1768226E32C5E00DB2980 /* Assets.xcassets in Resources */,
 				11A1768026E32C5C00DB2980 /* Main.storyboard in Resources */,
 			);
@@ -318,23 +383,30 @@
 				11A1777B26F23AD300DB2980 /* AccountSectionConfigurator.swift in Sources */,
 				11A1777726F23A7E00DB2980 /* ReusableViewConfigurator.swift in Sources */,
 				11A1773326E8D63100DB2980 /* UICollectionView+Extension.swift in Sources */,
-				11A1773026E8D49200DB2980 /* CollectionViewFactory.swift in Sources */,
-				11A1773F26E8D89F00DB2980 /* AccountCollectionViewCell.swift in Sources */,
+				11B397FE26F4B5540077E08A /* ConfiguratorViewModelType.swift in Sources */,
+				11A1773026E8D49200DB2980 /* CollectionConfigurator.swift in Sources */,
+				11A1773F26E8D89F00DB2980 /* HScrollAccountCardCollectionViewCell.swift in Sources */,
 				11A176D226E34A3200DB2980 /* UITableView+Extension.swift in Sources */,
+				11B397EA26F4B1790077E08A /* TileImageCellConfigurator.swift in Sources */,
 				11A1767926E32C5C00DB2980 /* AppDelegate.swift in Sources */,
 				11A176D526E34A4B00DB2980 /* NSObject+Extension.swift in Sources */,
+				11B397F526F4B1EF0077E08A /* TileImageCollectionViewCell.swift in Sources */,
 				11A1776226EC8F1800DB2980 /* GridCollectionViewCell.swift in Sources */,
 				11A1772726E8D41000DB2980 /* CollectionViewController.swift in Sources */,
 				11A176F426E3594B00DB2980 /* AccountModel.swift in Sources */,
 				11A176C426E33E0100DB2980 /* SelfSizingTableView.swift in Sources */,
 				11A1772D26E8D47B00DB2980 /* CollectionViewModel.swift in Sources */,
 				11A1778226F23BA600DB2980 /* GridSectionConfigurator.swift in Sources */,
+				11B397ED26F4B18B0077E08A /* GridCellConfigurator.swift in Sources */,
+				11B397E326F4B1500077E08A /* HScrollAccountCardCellConfigurator.swift in Sources */,
 				11A1774526E8D9B800DB2980 /* AccountCardCollectionViewCell.swift in Sources */,
 				11A1777F26F23B8000DB2980 /* TileSectionConfigurator.swift in Sources */,
 				11A1777126F23A0900DB2980 /* SectionConfigurator.swift in Sources */,
 				11A1775C26EC7FF800DB2980 /* TileCollectionViewCell.swift in Sources */,
 				11A1774F26E8E16400DB2980 /* AccountHeaderCollectionReusableView.swift in Sources */,
 				11A1777426F23A2700DB2980 /* CellConfigurator.swift in Sources */,
+				11B397E726F4B1680077E08A /* TileCellConfigurator.swift in Sources */,
+				11B397F126F4B1AC0077E08A /* TitleHeaderReusableViewConfigurator.swift in Sources */,
 				11A1767B26E32C5C00DB2980 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
