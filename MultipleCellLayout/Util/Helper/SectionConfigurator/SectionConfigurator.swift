@@ -8,7 +8,7 @@
 import UIKit
 
 protocol Expandable {
-    var isExpandable: Bool { get }
+    var isExpandable: Bool { get set }
 }
 
 protocol ConfiguratorRegisterable {
@@ -43,9 +43,35 @@ class SectionConfigurator: SectionConfigurable {
     }
 }
 
+protocol ExpandableSectionConfiguratorDelegate: class {
+    func expand(section: Int)
+}
+
 class ExpandableSectionConfigurator: SectionConfigurator, Expandable {
     private let initialRowCount: Int
-    var isExpandable: Bool = false
+    
+    var defaultRowCount: Int {
+        get {
+            return initialRowCount
+        }
+    }
+    
+    var expandedRowCount: Int {
+        get {
+            let totalCellCount = cellConfigurator.count
+            return totalCellCount > defaultRowCount ? totalCellCount : defaultRowCount
+        }
+    }
+    
+    var isExpandable: Bool = false {
+        didSet {
+            if var expandable = headerConfigurator as? Expandable {
+                expandable.isExpandable.toggle()
+            } else if var expandable = footerConfigurator as? Expandable {
+                expandable.isExpandable.toggle()
+            }
+        }
+    }
     
     init(
         cellConfigurator: [CellConfigurator],

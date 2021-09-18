@@ -11,16 +11,15 @@ class CollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     private let viewModel = CollectionViewModel()
     lazy private var configurator: CollectionConfigurator = {
-        let configurator = CollectionConfigurator(viewModel: viewModel)
+        let configurator = CollectionConfigurator(
+            viewModel: viewModel,
+            collectionView: collectionView
+        )
         return configurator
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: cell register 방식 고민 필요.
-        AccountSectionConfigurator.register(collectionView: collectionView)
-        TileSectionConfigurator.register(collectionView: collectionView)
-        GridSectionConfigurator.register(collectionView: collectionView)
     }
 }
 
@@ -38,11 +37,11 @@ extension CollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return configurator.dequeueReuseCell( collectionView, cellForRowAt: indexPath)
+        return configurator.dequeueReuseCell(cellForRowAt: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        return configurator.dequeueReusableView( collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+        return configurator.dequeueReusableView(viewForSupplementaryElementOfKind: kind, at: indexPath)
     }
 }
 
@@ -56,14 +55,14 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return configurator.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath)
+        return configurator.cellSize(at: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return configurator.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForHeaderInSection: section)
+        return configurator.headerSize(section: section)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return configurator.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section)
+        return configurator.footerSize(section: section)
     }
 }

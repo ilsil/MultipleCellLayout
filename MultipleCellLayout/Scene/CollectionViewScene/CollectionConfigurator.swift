@@ -7,30 +7,67 @@
 
 import UIKit
 
+protocol ReloadSectionConfiguratorDelegate: class {
+    func reload(section: Int?)
+}
+
 class CollectionConfigurator {
-    private var viewModel: ConfiguratorViewModelType
+    private weak var collectionView: UICollectionView?
+    private weak var viewModel: ConfiguratorViewModelType?
     
-    init(viewModel: ConfiguratorViewModelType) {
+    init(
+        viewModel: ConfiguratorViewModelType,
+        collectionView: UICollectionView
+    ) {
+        self.collectionView = collectionView
         self.viewModel = viewModel
+        viewModel.delegate = self
+        register()
+    }
+    
+    private func register() {
+        guard let collectionView = collectionView else { return }
+        //TODO: cell register와 ViewModel의 실제 데이터와 구조적으로 엮는 부분이 필요
+        collectionView.register(
+            identifier: HScrollAccountCardCellConfigurator.identifier
+        )
+        collectionView.register(identifier: TileCellConfigurator.identifier)
+        collectionView.register(identifier: TileImageHalfWidthCellConfigurator.identifier)
+        collectionView.register(identifier: GridCellConfigurator.identifier)
+        collectionView.registerHeaderView(
+            identifier: TitleHeaderReusableViewConfigurator.identifier
+        )
+        collectionView.registerFooterView(
+            identifier: ExpandableImageCollectionReusableView.identifier
+        )
     }
     
     var numberOfSections: Int {
-        return viewModel.configurators.count
+        return viewModel?.configurators.count ?? 0
     }
     
     func numberOfItemsInSection(section: Int) -> Int {
-        return viewModel.configurators[section].rowCount()
+        return viewModel?.configurators[section].rowCount() ?? 0
     }
     
-    func dequeueReuseCell(_ collectionView: UICollectionView, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    func dequeueReuseCell(cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let viewModel = viewModel,
+              let collectionView = collectionView else { return UICollectionViewCell() }
         let item = viewModel.configurators[indexPath.section]
         let cellConfigurator = item.cellConfigurator[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: type(of:cellConfigurator).identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: type(of:cellConfigurator).identifier, for: indexPath
+        )
         item.cellConfigurator[indexPath.row].configure(cell: cell)
         return cell
     }
     
-    func dequeueReusableView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func dequeueReusableView(
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let viewModel = viewModel,
+              let collectionView = collectionView else { return UICollectionReusableView() }
         if kind == UICollectionView.elementKindSectionHeader {
             if let headerConfigurator = viewModel.configurators[indexPath.section].headerConfigurator {
                 let identifier = type(of: headerConfigurator).identifier
@@ -49,25 +86,59 @@ class CollectionConfigurator {
         return UICollectionReusableView()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func cellSize(at indexPath: IndexPath) -> CGSize {
+        guard let viewModel = viewModel,
+              let collectionView = collectionView else { return .zero }
         return viewModel
             .configurators[indexPath.section]
             .cellConfigurator[indexPath.row]
             .size(containerFrame: collectionView.frame)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func headerSize(section: Int) -> CGSize {
+        guard let viewModel = viewModel,
+              let collectionView = collectionView else { return .zero }
         return viewModel
             .configurators[section]
             .headerConfigurator?
             .size(containerFrame: collectionView.frame) ?? .zero
-            
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    func footerSize(section: Int) -> CGSize {
+        guard let viewModel = viewModel,
+              let collectionView = collectionView else { return .zero }
         return viewModel
             .configurators[section]
             .footerConfigurator?
             .size(containerFrame: collectionView.frame) ?? .zero
+    }
+}
+
+extension CollectionConfigurator: ReloadSectionConfiguratorDelegate {
+    func reload(section: Int?) {
+        guard let viewModel = viewModel,
+              let collectionView = collectionView else { return }
+        if let section = section {
+            /// ExpandableSection인 경우는 Row가 변경될 때 자연스럽게 애니메이션 효과가 나타나도록 처리
+            if let configurator = viewModel.configurators[section] as? ExpandableSectionConfigurator {
+                let defaultRowCount = configurator.defaultRowCount
+                let expandedRowCount = configurator.expandedRowCount
+                let reloadIndexPathList = (defaultRowCount..<expandedRowCount)
+                    .map{ index in
+                        IndexPath(row: index, section: section)
+                    }
+                collectionView.performBatchUpdates({
+                    if configurator.isExpandable {
+                        collectionView.insertItems(at: reloadIndexPathList)
+                    } else {
+                        collectionView.deleteItems(at: reloadIndexPathList)
+                    }
+                }, completion: nil)
+            } else {
+                collectionView.reloadSections([section])
+            }
+        } else {
+            collectionView.reloadData()
+        }
     }
 }

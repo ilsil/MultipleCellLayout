@@ -7,6 +7,7 @@
 
 import Foundation
 
-protocol ConfiguratorViewModelType {
+protocol ConfiguratorViewModelType: class {
     var configurators: [SectionConfigurator] { get }
+    var delegate: ReloadSectionConfiguratorDelegate? { get set }
 }
