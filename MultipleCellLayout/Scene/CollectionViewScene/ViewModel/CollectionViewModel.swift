@@ -16,11 +16,14 @@ class CollectionViewModel: ConfiguratorViewModelType {
     }
     
     private func setTempData() {
-        let config = HScrollAccountCardCellConfigurator.init(item: [
-            AccountModel(account: "110-100", money: "2,000"),
-            AccountModel(account: "210-100", money: "5,000"),
-            AccountModel(account: "310-100", money: "12,000")
-        ])
+        let config = HScrollAccountCardCellConfigurator.init(item:
+                                                                AccountCellModel(accounts:
+                                                                                    [
+                                                                                        Account(accountNumber: "110-100", money: "2,000"),
+                                                                                        Account(accountNumber: "210-100", money: "5,000"),
+                                                                                        Account(accountNumber: "310-100", money: "12,000")
+                                                                                    ])
+        )
         let headerConfig = TitleHeaderReusableViewConfigurator(item: "Header Title")
         configurators.append(
             SectionConfigurator(
@@ -30,14 +33,36 @@ class CollectionViewModel: ConfiguratorViewModelType {
         )
         
         let expandTileConfig: [CellConfigurator] = [
-            TileImageFullWidthCellConfigurator(item:"AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"),
-            TileImageFullWidthCellConfigurator(item:"BBB"),
-            TileImageFullWidthCellConfigurator(item:"AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"),
-            TileImageFullWidthCellConfigurator(item:"BBB"),
-            TileImageFullWidthCellConfigurator(item:"AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"),
-            TileImageFullWidthCellConfigurator(item:"BBB"),
-            TileImageFullWidthCellConfigurator(item:"AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"),
-            TileImageFullWidthCellConfigurator(item:"BBB@@")
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "BBB"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "BBB"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "BBB"
+                )
+            )
         ]
         
         let expandableFooterConfigurator = ExpandableFooterReusableViewConfigurator(
@@ -55,42 +80,27 @@ class CollectionViewModel: ConfiguratorViewModelType {
             )
         )
         
-        let tileConfig: [CellConfigurator] = [
-            TileCellConfigurator(item:"AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"),
-            TileImageHalfWidthCellConfigurator(item:"BBB"),
-            TileCellConfigurator(item:"CCC"),
-            TileImageHalfWidthCellConfigurator(item:"DDD"),
-            TileCellConfigurator(item:"EEE"),
-            TileCellConfigurator(item:"AAA@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"),
-            TileImageHalfWidthCellConfigurator(item:"BBB"),
-            TileImageHalfWidthCellConfigurator(item:"CCC"),
-            TileCellConfigurator(item:"DDD"),
-            TileCellConfigurator(item:"EEE")
-        ]
-        
-        configurators.append(
-            SectionConfigurator(
-                cellConfigurator: tileConfig
-            )
+        let gridConfig = GridCellConfigurator(item:
+                                                GridCellModel(titles:
+                                                                [
+                                                                    "11",
+                                                                    "2222",
+                                                                    "33",
+                                                                    "44444",
+                                                                    "5555",
+                                                                    "666",
+                                                                    "777",
+                                                                    "8",
+                                                                    "9999",
+                                                                    "44444",
+                                                                    "5555",
+                                                                    "666",
+                                                                    "777",
+                                                                    "8",
+                                                                    "9999"
+                                                                ]
+                                                )
         )
-        
-        let gridConfig = GridCellConfigurator(item: [
-            "11",
-            "2222",
-            "33",
-            "44444",
-            "5555",
-            "666",
-            "777",
-            "8",
-            "9999",
-            "44444",
-            "5555",
-            "666",
-            "777",
-            "8",
-            "9999"
-        ])
         configurators.append(SectionConfigurator(cellConfigurator: [gridConfig]))
     }
 }

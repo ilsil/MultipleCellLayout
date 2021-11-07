@@ -77,4 +77,49 @@ extension UICollectionView {
         let view = self.dequeueReusableView(type: type, kind: UICollectionView.elementKindSectionFooter, for: indexPath)
         return view
     }
+    
+    enum ReloadMode {
+        case insert(at: IndexPath)
+        case delete(at: IndexPath)
+        case move(from: IndexPath, to: IndexPath)
+    }
+    
+    /// CollectionView 업데이트
+    /// - Parameters:
+    ///   - target: 변경 방식과 해당 모델의 IndexPath
+    ///   - updateModel: CollectionView의 data Model 업데이트 클로저
+    ///   - completion: 완료 후 콜백처리
+    func reload(
+        at target: [ReloadMode],
+        updateModel : () -> Void,
+        completion: ((Bool) -> Void)? = nil
+    ) {
+        var deleteIndexPaths: [IndexPath] = []
+        var insertIndexPaths: [IndexPath] = []
+        var moveIndexPaths: [(IndexPath, IndexPath)] = []
+        
+        target.forEach {
+            switch $0 {
+            case .insert(at: let indexPath):
+                insertIndexPaths.append(indexPath)
+            case .delete(at: let indexPath):
+                deleteIndexPaths.append(indexPath)
+            case .move(from: let fromIndex, to: let toIndex):
+                moveIndexPaths.append((fromIndex, toIndex))
+            }
+        }
+        
+        performBatchUpdates {
+            /// performBatchUpdates를 사용할 때 주의
+            /// collectionView의 dataModel 업데이트를 update 클로저 내부에서 실행시켜야 함!
+            updateModel()
+            deleteItems(at: deleteIndexPaths)
+            insertItems(at: insertIndexPaths)
+            moveIndexPaths.forEach {
+                moveItem(at: $0, to: $1)
+            }
+        } completion: {
+            completion?($0)
+        }
+    }
 }

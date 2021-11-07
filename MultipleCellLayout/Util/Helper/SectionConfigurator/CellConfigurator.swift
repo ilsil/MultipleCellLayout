@@ -21,11 +21,13 @@ protocol CellConfigurator: Identifier {
     func size(containerFrame: CGRect) -> CGSize
 }
 
-class CollectionViewCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UICollectionViewCell {
+protocol CellModel: Equatable { }
+
+class CollectionViewCellConfigurator<CellType: ConfigurableCell, DataType:CellModel>: CellConfigurator where CellType.DataType == DataType, CellType: UICollectionViewCell {
     
     static var identifier: String { return CellType.identifier }
     
-    let item: DataType
+    var item: DataType
     
     init(item: DataType) {
         self.item = item

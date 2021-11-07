@@ -15,7 +15,7 @@ class TileImageCollectionViewCell: UICollectionViewCell, ConfigurableCell {
         // Initialization code
     }
     
-    func configure(data: String) {
-        titleLabel.text = data
+    func configure(data: TileCellModel) {
+        titleLabel.text = data.title
     }
 }

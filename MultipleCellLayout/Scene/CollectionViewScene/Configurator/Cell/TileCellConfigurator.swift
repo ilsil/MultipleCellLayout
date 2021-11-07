@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TileCellConfigurator: CollectionViewCellConfigurator<TileCollectionViewCell, String> {
+class TileCellConfigurator: CollectionViewCellConfigurator<TileCollectionViewCell, TileCellModel> {
     override func size(containerFrame: CGRect) -> CGSize {
         return CGSize(width: containerFrame.width/2, height: 50)
     }

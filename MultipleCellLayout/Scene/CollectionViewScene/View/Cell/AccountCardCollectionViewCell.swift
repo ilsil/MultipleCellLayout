@@ -22,7 +22,7 @@ class AccountCardCollectionViewCell: UICollectionViewCell, ConfigurableCell {
         bankLogoView.backgroundColor = .cyan
     }
     
-    func configure(data: AccountModel) {
-        accountLabel.text = "\(data.account): $\(data.money)"
+    func configure(data: Account) {
+        accountLabel.text = "\(data.accountNumber): $\(data.money)"
     }
 }

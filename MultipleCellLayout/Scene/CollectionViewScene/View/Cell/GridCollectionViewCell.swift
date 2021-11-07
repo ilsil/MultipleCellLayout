@@ -38,7 +38,7 @@ class GridCollectionViewCell: UICollectionViewCell, ConfigurableCell {
         setCollectionView()
     }
     
-    private var models: [String]? {
+    private var titles: [String]? {
         didSet {
             collectionView.reloadData()
         }
@@ -54,8 +54,8 @@ class GridCollectionViewCell: UICollectionViewCell, ConfigurableCell {
         collectionView.register(type: TileCollectionViewCell.self)
     }
     
-    func configure(data: [String]) {
-        self.models = data
+    func configure(data: GridCellModel) {
+        self.titles = data.titles
     }
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
@@ -72,13 +72,13 @@ extension GridCollectionViewCell: UICollectionViewDelegate {
 
 extension GridCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return models?.count ?? 0
+        return titles?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: TileCollectionViewCell.self, for: indexPath)
-        if let model = models?[indexPath.row] {
-            cell.configure(data: model)
+        if let model = titles?[indexPath.row] {
+            cell.configure(data: .init(title: model))
         }
         return cell
     }

@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct AccountModel {
-    var account: String
+struct Account: Equatable {
+    var accountNumber: String
     var money: String
+}
+
+struct AccountCellModel: CellModel {
+    var accounts: [Account]
 }

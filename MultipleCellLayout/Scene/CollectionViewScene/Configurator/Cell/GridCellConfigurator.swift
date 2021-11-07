@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GridCellConfigurator: CollectionViewCellConfigurator<GridCollectionViewCell, [String]> {
+class GridCellConfigurator: CollectionViewCellConfigurator<GridCollectionViewCell, GridCellModel> {
     override func size(containerFrame: CGRect) -> CGSize {
         let frame = CGRect(x: 0, y: 0, width: containerFrame.width, height: 10)
         let dummyCell = GridCollectionViewCell(frame: frame)

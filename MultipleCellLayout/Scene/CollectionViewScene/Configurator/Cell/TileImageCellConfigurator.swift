@@ -7,13 +7,13 @@
 
 import UIKit
 
-class TileImageHalfWidthCellConfigurator: CollectionViewCellConfigurator<TileImageCollectionViewCell, String> {
+class TileImageHalfWidthCellConfigurator: CollectionViewCellConfigurator<TileImageCollectionViewCell, TileCellModel> {
     override func size(containerFrame: CGRect) -> CGSize {
         return CGSize(width: containerFrame.width/2, height: 50)
     }
 }
 
-class TileImageFullWidthCellConfigurator: CollectionViewCellConfigurator<TileImageCollectionViewCell, String> {
+class TileImageFullWidthCellConfigurator: CollectionViewCellConfigurator<TileImageCollectionViewCell, TileCellModel> {
     override func size(containerFrame: CGRect) -> CGSize {
         return CGSize(width: containerFrame.width, height: 50)
     }

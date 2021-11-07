@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HScrollAccountCardCellConfigurator: CollectionViewCellConfigurator<HScrollAccountCardCollectionViewCell, [AccountModel]> {
+class HScrollAccountCardCellConfigurator: CollectionViewCellConfigurator<HScrollAccountCardCollectionViewCell, AccountCellModel> {
     override func size(containerFrame: CGRect) -> CGSize {
         return CGSize(width: containerFrame.width, height: 300)
     }

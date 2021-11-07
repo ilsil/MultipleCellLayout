@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1102A4612737A52500816D80 /* GridCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1102A4602737A52500816D80 /* GridCellModel.swift */; };
+		1102A4642737A5A300816D80 /* TileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1102A4632737A5A300816D80 /* TileCellModel.swift */; };
 		11A1767926E32C5C00DB2980 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1767826E32C5C00DB2980 /* AppDelegate.swift */; };
 		11A1767B26E32C5C00DB2980 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1767A26E32C5C00DB2980 /* SceneDelegate.swift */; };
 		11A1768026E32C5C00DB2980 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A1767E26E32C5C00DB2980 /* Main.storyboard */; };
@@ -48,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1102A4602737A52500816D80 /* GridCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellModel.swift; sourceTree = "<group>"; };
+		1102A4632737A5A300816D80 /* TileCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileCellModel.swift; sourceTree = "<group>"; };
 		11A1767526E32C5C00DB2980 /* MultipleCellLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultipleCellLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A1767826E32C5C00DB2980 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11A1767A26E32C5C00DB2980 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 			children = (
 				11A176F326E3594B00DB2980 /* AccountModel.swift */,
 				11B3981626F5D0590077E08A /* ExpandableModel.swift */,
+				1102A4602737A52500816D80 /* GridCellModel.swift */,
+				1102A4632737A5A300816D80 /* TileCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -385,11 +391,13 @@
 				11B397EA26F4B1790077E08A /* TileImageCellConfigurator.swift in Sources */,
 				11A1767926E32C5C00DB2980 /* AppDelegate.swift in Sources */,
 				11A176D526E34A4B00DB2980 /* NSObject+Extension.swift in Sources */,
+				1102A4612737A52500816D80 /* GridCellModel.swift in Sources */,
 				11B3980F26F5C5BA0077E08A /* ExpandableImageCollectionReusableView.swift in Sources */,
 				11B397F526F4B1EF0077E08A /* TileImageCollectionViewCell.swift in Sources */,
 				11A1776226EC8F1800DB2980 /* GridCollectionViewCell.swift in Sources */,
 				11A1772726E8D41000DB2980 /* CollectionViewController.swift in Sources */,
 				11A176F426E3594B00DB2980 /* AccountModel.swift in Sources */,
+				1102A4642737A5A300816D80 /* TileCellModel.swift in Sources */,
 				11A176C426E33E0100DB2980 /* SelfSizingTableView.swift in Sources */,
 				11A1772D26E8D47B00DB2980 /* CollectionViewModel.swift in Sources */,
 				11B397ED26F4B18B0077E08A /* GridCellConfigurator.swift in Sources */,
