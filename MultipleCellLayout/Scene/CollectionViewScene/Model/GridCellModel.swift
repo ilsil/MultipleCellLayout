@@ -8,5 +8,11 @@
 import Foundation
 
 struct GridCellModel: CellModel {
+    let uuid: UUID
     let titles: [String]
+    
+    init(titles: [String], uuid: UUID = UUID()) {
+        self.titles = titles
+        self.uuid = uuid
+    }
 }

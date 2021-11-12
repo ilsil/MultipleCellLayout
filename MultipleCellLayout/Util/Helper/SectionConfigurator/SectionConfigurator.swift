@@ -21,6 +21,7 @@ protocol SectionConfigurable {
     var footerConfigurator: ReusableViewConfigurator? { get }
     
     func rowCount() -> Int
+    func updateCellConfigurators(newValue newCellConfigurators: [CellConfigurator]) -> Bool
 }
 
 class SectionConfigurator: SectionConfigurable {
@@ -40,6 +41,17 @@ class SectionConfigurator: SectionConfigurable {
     
     func rowCount() -> Int {
         return cellConfigurator.count
+    }
+    
+    /// 업데이트시 변경된 CellConfigurators의 변경 여부 리턴
+    /// - Parameter newCellConfigurators: 업데이트된 CellConfigurators
+    /// - Returns: 변경된 정보가 있으면 true, 없으면 false
+    func updateCellConfigurators(newValue newCellConfigurators: [CellConfigurator]) -> Bool {
+        let oldList = cellConfigurator.map { $0.uuid }
+        let newList = newCellConfigurators.map { $0.uuid }
+        
+        let diffList = newList.difference(from: oldList)
+        return diffList.isEmpty ? false : true
     }
 }
 
@@ -74,7 +86,7 @@ class ExpandableSectionConfigurator: SectionConfigurator, Expandable {
     }
     
     init(
-        cellConfigurator: [CellConfigurator],
+        cellConfigurator: [CellConfigurator] = [],
         headerConfigurator: ReusableViewConfigurator? = nil,
         footerConfigurator: ReusableViewConfigurator? = nil,
         initialRowCount: Int

@@ -13,5 +13,11 @@ struct Account: Equatable {
 }
 
 struct AccountCellModel: CellModel {
-    var accounts: [Account]
+    let uuid: UUID
+    let accounts: [Account]
+    
+    init(accounts: [Account], uuid: UUID = UUID()) {
+        self.uuid = uuid
+        self.accounts = accounts
+    }
 }

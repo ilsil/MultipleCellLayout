@@ -16,14 +16,25 @@ protocol ConfigurableCell {
     func configure(data: DataType)
 }
 
-protocol CellConfigurator: Identifier {
+protocol CellConfigurator: Identifier, Uniquely {
+    var uuid: UUID { get }
     func configure(cell: UICollectionViewCell)
     func size(containerFrame: CGRect) -> CGSize
 }
 
-protocol CellModel: Equatable { }
+protocol Uniquely {
+    var uuid: UUID { get }
+}
+
+protocol CellModel: Equatable, Uniquely {
+    var uuid: UUID { get }
+}
 
 class CollectionViewCellConfigurator<CellType: ConfigurableCell, DataType:CellModel>: CellConfigurator where CellType.DataType == DataType, CellType: UICollectionViewCell {
+    
+    var uuid: UUID {
+        return item.uuid
+    }
     
     static var identifier: String { return CellType.identifier }
     

@@ -8,5 +8,11 @@
 import Foundation
 
 struct TileCellModel: CellModel {
+    let uuid: UUID
     let title: String
+    
+    init(title: String, uuid: UUID = UUID()) {
+        self.title = title
+        self.uuid = uuid
+    }
 }
