@@ -21,7 +21,16 @@ protocol SectionConfigurable {
     var footerConfigurator: ReusableViewConfigurator? { get }
     
     func rowCount() -> Int
-    func updateCellConfigurators(newValue newCellConfigurators: [CellConfigurator]) -> Bool
+    /// CellConfigurator 업데이트 및 변경리스트(insert, delete) 리턴
+    func updateCellConfigurators(
+        section: Int,
+        newValue newCellConfigurators: [CellConfigurator]
+    ) -> [UpdateMode]
+}
+
+enum UpdateMode {
+    case insert(IndexPath)
+    case delete(IndexPath)
 }
 
 class SectionConfigurator: SectionConfigurable {
@@ -43,69 +52,46 @@ class SectionConfigurator: SectionConfigurable {
         return cellConfigurator.count
     }
     
-    /// 업데이트시 변경된 CellConfigurators의 변경 여부 리턴
-    /// - Parameter newCellConfigurators: 업데이트된 CellConfigurators
-    /// - Returns: 변경된 정보가 있으면 true, 없으면 false
-    func updateCellConfigurators(newValue newCellConfigurators: [CellConfigurator]) -> Bool {
-        let oldList = cellConfigurator.map { $0.uuid }
-        let newList = newCellConfigurators.map { $0.uuid }
-        
+    func updateCellConfigurators(
+        section: Int,
+        newValue newCellConfigurators: [CellConfigurator]
+    ) -> [UpdateMode] {
+        let list = updateModes(
+            section: section,
+            from: cellConfigurator,
+            to: newCellConfigurators
+        )
+        cellConfigurator = newCellConfigurators
+        return list
+    }
+}
+
+extension SectionConfigurator {
+    func updateModes(
+        section: Int,
+        from oldValue: [CellConfigurator],
+        to newValue: [CellConfigurator]
+    ) -> [UpdateMode] {
+        var updateModes: [UpdateMode] = []
+        let oldList = oldValue.map { $0.uuid }
+        let newList = newValue.map { $0.uuid }
         let diffList = newList.difference(from: oldList)
-        return diffList.isEmpty ? false : true
-    }
-}
-
-protocol ExpandableSectionConfiguratorDelegate: class {
-    func expand(section: Int)
-}
-
-class ExpandableSectionConfigurator: SectionConfigurator, Expandable {
-    private let initialRowCount: Int
-    
-    var defaultRowCount: Int {
-        get {
-            return initialRowCount
-        }
-    }
-    
-    var expandedRowCount: Int {
-        get {
-            let totalCellCount = cellConfigurator.count
-            return totalCellCount > defaultRowCount ? totalCellCount : defaultRowCount
-        }
-    }
-    
-    var isExpandable: Bool = false {
-        didSet {
-            if var expandable = headerConfigurator as? Expandable {
-                expandable.isExpandable.toggle()
-            } else if var expandable = footerConfigurator as? Expandable {
-                expandable.isExpandable.toggle()
+        diffList.forEach {
+            switch $0 {
+            case .insert(offset: let offset, element: _, associatedWith: _):
+                updateModes.append(
+                    .insert(
+                        .init(row: offset, section: section)
+                    )
+                )
+            case .remove(offset: let offset, element: _, associatedWith: _):
+                updateModes.append(
+                    .delete(
+                        .init(row: offset, section: section)
+                    )
+                )
             }
         }
-    }
-    
-    init(
-        cellConfigurator: [CellConfigurator] = [],
-        headerConfigurator: ReusableViewConfigurator? = nil,
-        footerConfigurator: ReusableViewConfigurator? = nil,
-        initialRowCount: Int
-    ) {
-        self.initialRowCount = initialRowCount
-        super.init(
-            cellConfigurator: cellConfigurator,
-            headerConfigurator: headerConfigurator,
-            footerConfigurator: footerConfigurator
-        )
-    }
-    
-    override func rowCount() -> Int {
-        let expandedRowCount = super.rowCount()
-        if isExpandable {
-            return expandedRowCount
-        } else {
-            let rowCount = expandedRowCount > initialRowCount ? initialRowCount : expandedRowCount
-            return rowCount
-        }
+        return updateModes
     }
 }

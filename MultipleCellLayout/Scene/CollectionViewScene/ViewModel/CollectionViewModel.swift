@@ -12,6 +12,7 @@ class CollectionViewModel: ConfiguratorViewModelType {
     var configurators: [SectionConfigurator] = []
     
     private var accountSectionConfigurator: SectionConfigurator?
+    private var expandableSectionConfigurator: SectionConfigurator?
     
     init() {
         setTempData()
@@ -78,12 +79,14 @@ class CollectionViewModel: ConfiguratorViewModelType {
         )
         expandableFooterConfigurator.delegate = self
         
+        expandableSectionConfigurator = ExpandableSectionConfigurator(
+            cellConfigurator: expandTileConfig,
+            footerConfigurator: expandableFooterConfigurator,
+            initialRowCount: 3
+        )
+        
         configurators.append(
-            ExpandableSectionConfigurator(
-                cellConfigurator: expandTileConfig,
-                footerConfigurator: expandableFooterConfigurator,
-                initialRowCount: 3
-            )
+            expandableSectionConfigurator!
         )
         
         let gridConfig = GridCellConfigurator(
@@ -112,6 +115,7 @@ class CollectionViewModel: ConfiguratorViewModelType {
         /// 업데이트 샘플로 딜레이를 적용
         DispatchQueue.global().asyncAfter(deadline: .now()+3) {
             self.updateSection()
+            self.updateExpandableSection()
         }
     }
 }
@@ -128,13 +132,43 @@ private extension CollectionViewModel {
                 )
             )
         ]
-        guard let section = configurators.index(at: accountSectionConfigurator!) else { return }
-        DispatchQueue.main.async {
-            self.delegate?.reload(section: section) { [weak self] in
-                self?.accountSectionConfigurator?.cellConfigurator = newCellConfigurators
-            }
-        }
-        
+        guard let sectionConfigurator = accountSectionConfigurator,
+            let section = configurators.index(at: sectionConfigurator) else { return }
+        self.delegate?.reload(
+            section: section,
+            newCellConfigurators: newCellConfigurators
+        )
+    }
+    
+    func updateExpandableSection() {
+        let newCellConfigurators: [CellConfigurator] = [
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "New"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "@@@@@@@@@@@@@@@@@"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "BBB@"
+                )
+            ),
+            TileImageFullWidthCellConfigurator(
+                item: TileCellModel(
+                    title: "AAA@@"
+                )
+            )
+        ]
+        guard let sectionConfigurator = expandableSectionConfigurator,
+              let section = configurators.index(at: sectionConfigurator) else { return }
+        self.delegate?.reload(
+            section: section,
+            newCellConfigurators: newCellConfigurators
+        )
     }
 }
 
@@ -142,7 +176,7 @@ extension CollectionViewModel: ExpandableSectionConfiguratorDelegate {
     func expand(section: Int) {
         if let expandableSection = configurators[section] as? ExpandableSectionConfigurator {
             expandableSection.isExpandable.toggle()
-            delegate?.reload(section: section, updateModel: nil)
+            delegate?.reload(sections: [section])
         }
     }
 }

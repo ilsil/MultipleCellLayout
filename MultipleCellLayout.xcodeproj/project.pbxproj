@@ -10,6 +10,7 @@
 		1102A4612737A52500816D80 /* GridCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1102A4602737A52500816D80 /* GridCellModel.swift */; };
 		1102A4642737A5A300816D80 /* TileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1102A4632737A5A300816D80 /* TileCellModel.swift */; };
 		1102A46E273E99C400816D80 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1102A46D273E99C400816D80 /* Array+Extension.swift */; };
+		1102A4722740EC6600816D80 /* ExpandableSectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1102A4712740EC6500816D80 /* ExpandableSectionConfigurator.swift */; };
 		11A1767926E32C5C00DB2980 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1767826E32C5C00DB2980 /* AppDelegate.swift */; };
 		11A1767B26E32C5C00DB2980 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1767A26E32C5C00DB2980 /* SceneDelegate.swift */; };
 		11A1768026E32C5C00DB2980 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A1767E26E32C5C00DB2980 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		1102A4602737A52500816D80 /* GridCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellModel.swift; sourceTree = "<group>"; };
 		1102A4632737A5A300816D80 /* TileCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileCellModel.swift; sourceTree = "<group>"; };
 		1102A46D273E99C400816D80 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		1102A4712740EC6500816D80 /* ExpandableSectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSectionConfigurator.swift; sourceTree = "<group>"; };
 		11A1767526E32C5C00DB2980 /* MultipleCellLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultipleCellLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A1767826E32C5C00DB2980 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11A1767A26E32C5C00DB2980 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				11B397FD26F4B5540077E08A /* ConfiguratorViewModelType.swift */,
 				11A1777026F23A0900DB2980 /* SectionConfigurator.swift */,
+				1102A4712740EC6500816D80 /* ExpandableSectionConfigurator.swift */,
 				11A1777326F23A2700DB2980 /* CellConfigurator.swift */,
 				11A1777626F23A7E00DB2980 /* ReusableViewConfigurator.swift */,
 			);
@@ -395,6 +398,7 @@
 				11A1767926E32C5C00DB2980 /* AppDelegate.swift in Sources */,
 				11A176D526E34A4B00DB2980 /* NSObject+Extension.swift in Sources */,
 				1102A46E273E99C400816D80 /* Array+Extension.swift in Sources */,
+				1102A4722740EC6600816D80 /* ExpandableSectionConfigurator.swift in Sources */,
 				1102A4612737A52500816D80 /* GridCellModel.swift in Sources */,
 				11B3980F26F5C5BA0077E08A /* ExpandableImageCollectionReusableView.swift in Sources */,
 				11B397F526F4B1EF0077E08A /* TileImageCollectionViewCell.swift in Sources */,

@@ -9,7 +9,8 @@ import UIKit
 
 typealias UpdateSectionCellModelClosure = ()->Void
 protocol ReloadSectionConfiguratorDelegate: class {
-    func reload(section: Int, updateModel: UpdateSectionCellModelClosure?)
+    func reload(sections: IndexSet)
+    func reload(section: Int, newCellConfigurators: [CellConfigurator])
 }
 
 class CollectionConfigurator {
@@ -116,28 +117,37 @@ class CollectionConfigurator {
 }
 
 extension CollectionConfigurator: ReloadSectionConfiguratorDelegate {
-    func reload(section: Int, updateModel: UpdateSectionCellModelClosure? = nil) {
+    func reload(sections: IndexSet) {
+        guard let collectionView = collectionView else { return }
+        DispatchQueue.main.async {
+            collectionView.reloadSections(sections)
+        }
+    }
+    
+    func reload(section: Int, newCellConfigurators: [CellConfigurator]) {
         guard let viewModel = viewModel,
               let collectionView = collectionView else { return }
-        /// ExpandableSection인 경우는 Row가 변경될 때 자연스럽게 애니메이션 효과가 나타나도록 처리
-        if let configurator = viewModel.configurators[section] as? ExpandableSectionConfigurator {
-            let defaultRowCount = configurator.defaultRowCount
-            let expandedRowCount = configurator.expandedRowCount
-            let reloadIndexPathList = (defaultRowCount..<expandedRowCount)
-                .map{ index in
-                    IndexPath(row: index, section: section)
-                }
+        let sectionConfigurator = viewModel.configurators[section]
+        var insertIndexPaths: [IndexPath] = []
+        var deleteIndexPaths: [IndexPath] = []
+        
+        DispatchQueue.main.async {
             collectionView.performBatchUpdates({
-                updateModel?()
-                if configurator.isExpandable {
-                    collectionView.insertItems(at: reloadIndexPathList)
-                } else {
-                    collectionView.deleteItems(at: reloadIndexPathList)
+                let diffList = sectionConfigurator.updateCellConfigurators(
+                    section: section,
+                    newValue: newCellConfigurators
+                )
+                diffList.forEach {
+                    switch $0 {
+                    case .insert(let indexPath):
+                        insertIndexPaths.append(indexPath)
+                    case .delete(let indexPath):
+                        deleteIndexPaths.append(indexPath)
+                    }
                 }
+                collectionView.deleteItems(at: deleteIndexPaths)
+                collectionView.insertItems(at: insertIndexPaths)
             }, completion: nil)
-        } else {
-            updateModel?()
-            collectionView.reloadSections([section])
         }
     }
 }
